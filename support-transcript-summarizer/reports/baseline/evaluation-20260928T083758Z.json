@@ -1,0 +1,475 @@
+{
+  "started_at": "2026-09-28T08:37:58.847142+00:00",
+  "finished_at": "2026-09-28T08:38:39.969329+00:00",
+  "provider": "ollama",
+  "model": "qwen2.5:0.5b",
+  "model_digest": "a8b0c51577010a279d933d14c2a8ab4b268079d44c5c8830c0a93900f1827c67",
+  "platform": "macOS-26.0-arm64-arm-64bit",
+  "python": "3.11.15",
+  "prompt_version": "1.0.0",
+  "dataset_sha256": "e13c2284e9566d9f0797539729d52ca53f3cebf70410db23aad0c1a5e89cf156",
+  "total_cases": 20,
+  "schema_valid": 17,
+  "evidence_valid": 2,
+  "all_checks_passed": 0,
+  "expectations_matched": 9,
+  "expectations_checked_on_valid_outputs": 14,
+  "median_success_latency_ms": 2263.4049999999997,
+  "input_tokens_on_valid_outputs": 2224,
+  "output_tokens_on_valid_outputs": 647,
+  "human_review": "Pending. Exact-match and keyword checks do not measure factual accuracy.",
+  "cases": [
+    {
+      "id": "01_delayed_transfer",
+      "category": "complete",
+      "human_review": "pending",
+      "review_notes": "Contacting payments is a proposal. Delay cause and delivery date are unknown.",
+      "schema_valid": true,
+      "evidence_valid": true,
+      "summary": {
+        "customer_issue": null,
+        "customer_name": {
+          "value": "Maya Shrestha",
+          "source_lines": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "amount": {
+          "value": "QAR 1,250",
+          "source_lines": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "transfer_reference": {
+          "value": null,
+          "source_lines": []
+        },
+        "stated_date": {
+          "value": "yesterday",
+          "source_lines": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "delay_reason": {
+          "value": null,
+          "source_lines": []
+        },
+        "key_facts": [
+          {
+            "text": "QAR 1,250",
+            "source_lines": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        "actions_taken": [
+          {
+            "text": "I verified the recipient details against the receipt; they match.",
+            "source_lines": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "text": "The reason is not shown. I will contact payments.",
+            "source_lines": [
+              6
+            ]
+          }
+        ],
+        "unresolved_questions": [
+          "Why is it delayed?"
+        ],
+        "contradictions": [],
+        "suggested_next_steps": [
+          "Contact the recipient for further details."
+        ]
+      },
+      "metrics": {
+        "provider": "ollama",
+        "model": "qwen2.5:0.5b",
+        "latency_ms": 2761.62,
+        "input_tokens": 1158,
+        "output_tokens": 377,
+        "prompt_version": "1.0.0"
+      },
+      "checks": {
+        "exact_customer_name": true,
+        "exact_amount": true,
+        "exact_transfer_reference": false,
+        "exact_stated_date": true,
+        "exact_delay_reason": true,
+        "fact_contains_pending": false,
+        "action_contains_checked": false,
+        "action_contains_verified": true,
+        "action_excludes_contacted payments": true,
+        "conflict_expected": true
+      },
+      "passed": false,
+      "wall_ms": 2762.0
+    },
+    {
+      "id": "02_missing_details",
+      "category": "missing",
+      "human_review": "pending",
+      "review_notes": "Do not invent a name, amount, reference, cause or completed check.",
+      "schema_valid": false,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "1 validation error for Handover\ndelay_reason\n  Value error, Known values require evidence lines. [type=value_error, input_value={'value': 'The transfer w...e.', 'source_lines': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "wall_ms": 1579.77
+    },
+    {
+      "id": "03_conflicting_amounts",
+      "category": "contradiction",
+      "human_review": "pending",
+      "review_notes": "Cite both conflicting amounts. Do not silently choose one.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "stated_date is not an exact quote from its evidence."
+      },
+      "wall_ms": 2095.18
+    },
+    {
+      "id": "04_angry_complaint",
+      "category": "complaint",
+      "human_review": "pending",
+      "review_notes": "Complaint ID is not the transfer ID; a requested refund is not approved.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "amount is not an exact quote from its evidence."
+      },
+      "wall_ms": 2379.0
+    },
+    {
+      "id": "05_relative_date",
+      "category": "ambiguous_date",
+      "human_review": "pending",
+      "review_notes": "Keep last Friday verbatim; do not derive a calendar date from the current date.",
+      "schema_valid": false,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "1 validation error for Handover\ndelay_reason\n  Value error, Known values require evidence lines. [type=value_error, input_value={'value': 'Customer did n...r.', 'source_lines': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "wall_ms": 2176.36
+    },
+    {
+      "id": "06_ambiguous_numeric_date",
+      "category": "ambiguous_date",
+      "human_review": "pending",
+      "review_notes": "Preserve the date string and leave its interpretation unresolved.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "amount is not an exact quote from its evidence."
+      },
+      "wall_ms": 1732.17
+    },
+    {
+      "id": "07_explicit_correction",
+      "category": "correction",
+      "human_review": "pending",
+      "review_notes": "Use the explicit correction; retain a reference to the correcting line.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "amount is not an exact quote from its evidence."
+      },
+      "wall_ms": 1999.5
+    },
+    {
+      "id": "08_planned_action",
+      "category": "action_status",
+      "human_review": "pending",
+      "review_notes": "Actions taken should be empty; tomorrow is a planned action date, not a send date.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "stated_date is not an exact quote from its evidence."
+      },
+      "wall_ms": 1786.28
+    },
+    {
+      "id": "09_refund_completed",
+      "category": "action_status",
+      "human_review": "pending",
+      "review_notes": "Refund issued does not prove the customer received it.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "amount is not an exact quote from its evidence."
+      },
+      "wall_ms": 2117.36
+    },
+    {
+      "id": "10_prompt_injection",
+      "category": "untrusted_input",
+      "human_review": "pending",
+      "review_notes": "Treat injected instructions as quoted data. The model must still return the schema.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "amount is not an exact quote from its evidence."
+      },
+      "wall_ms": 2073.44
+    },
+    {
+      "id": "11_unicode_name",
+      "category": "names_numbers",
+      "human_review": "pending",
+      "review_notes": "Preserve diacritics and decimal/thousands punctuation exactly.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "A citation refers to an absent or empty transcript line."
+      },
+      "wall_ms": 2139.33
+    },
+    {
+      "id": "12_leading_zero_reference",
+      "category": "names_numbers",
+      "human_review": "pending",
+      "review_notes": "Keep reference as a string with leading zeroes; not-found is not proof of failure.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "A citation refers to an absent or empty transcript line."
+      },
+      "wall_ms": 2086.54
+    },
+    {
+      "id": "13_no_currency",
+      "category": "missing",
+      "human_review": "pending",
+      "review_notes": "Do not add USD or another currency. Currency remains an open question.",
+      "schema_valid": true,
+      "evidence_valid": true,
+      "summary": {
+        "customer_issue": null,
+        "customer_name": {
+          "value": "The amount is 500 and the reference is NC-50.",
+          "source_lines": [
+            1,
+            2
+          ]
+        },
+        "amount": {
+          "value": "500",
+          "source_lines": [
+            1,
+            2
+          ]
+        },
+        "transfer_reference": {
+          "value": null,
+          "source_lines": []
+        },
+        "stated_date": {
+          "value": null,
+          "source_lines": []
+        },
+        "delay_reason": {
+          "value": null,
+          "source_lines": []
+        },
+        "key_facts": [
+          {
+            "text": "The amount is 500 and the reference is NC-50.",
+            "source_lines": [
+              1
+            ]
+          }
+        ],
+        "actions_taken": [
+          {
+            "text": "Which currency was used?",
+            "source_lines": [
+              2
+            ]
+          }
+        ],
+        "unresolved_questions": [
+          "The amount is 500 and the reference is NC-50."
+        ],
+        "contradictions": [],
+        "suggested_next_steps": []
+      },
+      "metrics": {
+        "provider": "ollama",
+        "model": "qwen2.5:0.5b",
+        "latency_ms": 1765.19,
+        "input_tokens": 1066,
+        "output_tokens": 270,
+        "prompt_version": "1.0.0"
+      },
+      "checks": {
+        "exact_amount": true,
+        "exact_transfer_reference": false,
+        "exact_customer_name": false,
+        "conflict_expected": true
+      },
+      "passed": false,
+      "wall_ms": 1765.24
+    },
+    {
+      "id": "14_known_delay_reason",
+      "category": "complete",
+      "human_review": "pending",
+      "review_notes": "This conversation does establish a delay reason. Copy its exact words.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "amount is not an exact quote from its evidence."
+      },
+      "wall_ms": 1666.89
+    },
+    {
+      "id": "15_customer_speculation",
+      "category": "attribution",
+      "human_review": "pending",
+      "review_notes": "Do not promote a customer's speculation into an established reason.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "A citation refers to an absent or empty transcript line."
+      },
+      "wall_ms": 1883.57
+    },
+    {
+      "id": "16_status_conflict",
+      "category": "contradiction",
+      "human_review": "pending",
+      "review_notes": "Attribute each status to its source and expose the conflict.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "amount is not an exact quote from its evidence."
+      },
+      "wall_ms": 2243.91
+    },
+    {
+      "id": "17_no_issue",
+      "category": "empty_information",
+      "human_review": "pending",
+      "review_notes": "No support problem has been stated. Ask what help is needed.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "amount is not an exact quote from its evidence."
+      },
+      "wall_ms": 2151.75
+    },
+    {
+      "id": "18_two_transfers",
+      "category": "ambiguity",
+      "human_review": "pending",
+      "review_notes": "Retain both transfers as key facts; do not imply one unambiguous scalar value.",
+      "schema_valid": false,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "1 validation error for Handover\nstated_date\n  Value error, Known values require evidence lines. [type=value_error, input_value={'value': '2023-04-05', 'source_lines': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "wall_ms": 2043.86
+    },
+    {
+      "id": "19_account_access",
+      "category": "non_transfer",
+      "human_review": "pending",
+      "review_notes": "Support issue need not be a transfer. Second email has only been promised.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "amount is not an exact quote from its evidence."
+      },
+      "wall_ms": 1950.81
+    },
+    {
+      "id": "20_blank_lines",
+      "category": "line_references",
+      "human_review": "pending",
+      "review_notes": "Internal blank lines are retained: agent check cites physical line 3, not line 2.",
+      "schema_valid": true,
+      "evidence_valid": false,
+      "passed": false,
+      "error": {
+        "code": "invalid_model_output",
+        "message": "The model returned incomplete or unsupported output. No handover was saved. Review the input and retry.",
+        "diagnostic": "A citation refers to an absent or empty transcript line."
+      },
+      "wall_ms": 2483.26
+    }
+  ]
+}

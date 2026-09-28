@@ -1,0 +1,7 @@
+Customer: My name is Maya Shrestha. I sent QAR 1,250 yesterday and it has not arrived.
+Customer: The transfer reference is TRX-2048.
+Agent: I checked TRX-2048 in our system. It is marked pending.
+Customer: The recipient is my brother, Arun Shrestha.
+Agent: I verified the recipient account details against your receipt; they match.
+Customer: Why is it delayed? Can you confirm when it will arrive?
+Agent: The reason is not shown. I will ask the payments team to investigate.

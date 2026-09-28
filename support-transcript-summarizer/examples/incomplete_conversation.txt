@@ -1,0 +1,4 @@
+Customer: My transfer still has not arrived.
+Agent: Could you share the transfer reference and amount?
+Customer: I do not have those details with me.
+Agent: Please return with the receipt so we can check.

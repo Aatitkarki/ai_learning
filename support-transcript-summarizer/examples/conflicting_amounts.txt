@@ -1,0 +1,4 @@
+Customer: My name is Samira Khan. I sent USD 250 using reference PAY-703.
+Agent: My screen shows USD 200 for PAY-703.
+Customer: My receipt says USD 250. I have not received a refund.
+Agent: We have not resolved the amount discrepancy. I will request the receipt.

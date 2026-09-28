@@ -1,0 +1,18 @@
+[
+  {
+    "model": "qwen2.5:0.5b",
+    "created_at": "2026-09-28T08:37:12.922639Z",
+    "message": {
+      "role": "assistant",
+      "content": "{\n  \"customer_issue\": null,\n  \"customer_name\": {\n    \"value\": \"Customer\",\n    \"source_lines\": [\n      1,\n      2\n    ]\n  },\n  \"amount\": {\n    \"value\": \"0.00\",\n    \"source_lines\": [\n      3\n    ]\n  },\n  \"transfer_reference\": {\n    \"value\": null,\n    \"source_lines\": []\n  },\n  \"stated_date\": {\n    \"value\": \"2023-10-05\",\n    \"source_lines\": [\n      4\n    ]\n  },\n  \"delay_reason\": {\n    \"value\": \"Customer's transfer still has not arrived.\",\n    \"source_lines\": [\n      1,\n      2,\n      4\n    ]\n  },\n  \"key_facts\": [],\n  \"actions_taken\": [\n    {\n      \"text\": \"Please return with the receipt so we can check.\",\n      \"source_lines\": [\n        3\n      ]\n    }\n  ],\n  \"unresolved_questions\": [\n    \"Customer's transfer still has not arrived.\"\n  ],\n  \"contradictions\": [],\n  \"suggested_next_steps\": []\n}"
+    },
+    "done_reason": "stop",
+    "done": true,
+    "total_duration": 1858918041,
+    "load_duration": 9890666,
+    "prompt_eval_count": 1089,
+    "prompt_eval_duration": 262236167,
+    "eval_count": 248,
+    "eval_duration": 1583388458
+  }
+]

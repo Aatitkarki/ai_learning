@@ -1,0 +1,24 @@
+services:
+  api:
+    build: .
+    ports:
+      - "127.0.0.1:8010:8010"
+    environment:
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen2.5:3b}
+      DATABASE_PATH: /app/data/handovers.sqlite3
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - history:/app/data
+  ui:
+    build: .
+    command: ["streamlit", "run", "ui.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+    ports:
+      - "127.0.0.1:8501:8501"
+    environment:
+      API_BASE_URL: http://api:8010
+    depends_on:
+      - api
+volumes:
+  history:
